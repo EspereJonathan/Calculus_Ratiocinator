@@ -7,16 +7,11 @@ public class CalculusRatiocinator {
 
     // Function to evaluate a basic affirmation
     public static TruthValue evaluate(String affirmation) {
-        switch (affirmation.trim()) {
-            case "Lou est beau":
-                return TruthValue.VRAI;
-            case "Lou est pauvre":
-                return TruthValue.FAUX;
-            case "Lou est généreux":
-                return TruthValue.JENESAISPAS;
-            default:
-                return TruthValue.JENESAISPAS;
-        }
+        return switch (affirmation.trim()) {
+            case "Lou est beau" -> TruthValue.VRAI;
+            case "Lou est pauvre" -> TruthValue.FAUX;
+            default -> TruthValue.JENESAISPAS;
+        };
     }
 
     // Function to evaluate conjunction 'et'
@@ -49,22 +44,6 @@ public class CalculusRatiocinator {
             return TruthValue.VRAI;
         } else {
             return TruthValue.JENESAISPAS;
-        }
-    }
-
-    // Function to evaluate complex affirmations
-    public static TruthValue evaluateAffirmation(String affirmation) {
-        if (affirmation.contains(" et ")) {
-            String[] parts = affirmation.split(" et ");
-            return et(evaluate(parts[0].trim()), evaluate(parts[1].trim()));
-        } else if (affirmation.contains(" ou ")) {
-            String[] parts = affirmation.split(" ou ");
-            return ou(evaluate(parts[0].trim()), evaluate(parts[1].trim()));
-        } else if (affirmation.contains(" Donc ")) {
-            String[] parts = affirmation.split(" Donc ");
-            return donc(evaluate(parts[0].trim()), evaluate(parts[1].trim()));
-        } else {
-            return evaluate(affirmation.trim());
         }
     }
 
